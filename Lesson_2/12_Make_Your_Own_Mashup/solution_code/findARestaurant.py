@@ -7,8 +7,10 @@ import codecs
 sys.stdout = codecs.getwriter('utf8')(sys.stdout)
 sys.stderr = codecs.getwriter('utf8')(sys.stderr)
 
-foursquare_client_id = "PASTE_CLIENT_ID_HERE"
-foursquare_client_secret = "PASTE_CLIENT_SECRET_HERE"
+foursquare_client_id = "QVY0YIACTYI30DRWLK4ZUNT1KFQHAPGPOBKEM5DYWL0CLEJN"
+foursquare_client_secret = "BGHQXYAGTL5IPM3H5EUAAJDSHA1OFKQHRS4GFBGQKBCYU5BG"
+version = "20190425"
+print(version)
 
 
 def findARestaurant(mealType,location):
@@ -16,9 +18,11 @@ def findARestaurant(mealType,location):
 	latitude, longitude = getGeocodeLocation(location)
 	#2.  Use foursquare API to find a nearby restaurant with the latitude, longitude, and mealType strings.
 	#HINT: format for url will be something like https://api.foursquare.com/v2/venues/search?client_id=CLIENT_ID&client_secret=CLIENT_SECRET&v=20130815&ll=40.7,-74&query=sushi
-	url = ('https://api.foursquare.com/v2/venues/search?client_id=%s&client_secret=%s&v=20130815&ll=%s,%s&query=%s' % (foursquare_client_id, foursquare_client_secret,latitude,longitude,mealType))
+	url = ('https://api.foursquare.com/v2/venues/search?client_id=%s&client_secret=%s&v=%s&ll=%s,%s&query=%s' % (foursquare_client_id, foursquare_client_secret,version,latitude,longitude,mealType))
 	h = httplib2.Http()
 	result = json.loads(h.request(url,'GET')[1])
+	return result
+	pass
 	
 	if result['response']['venues']:
 		#3.  Grab the first restaurant
@@ -44,13 +48,13 @@ def findARestaurant(mealType,location):
 			imageURL = "http://pixabay.com/get/8926af5eb597ca51ca4c/1433440765/cheeseburger-34314_1280.png?direct"
 		#7.  return a dictionary containing the restaurant name, address, and image url
 		restaurantInfo = {'name':restaurant_name, 'address':restaurant_address, 'image':imageURL}
-		print "Restaurant Name: %s" % restaurantInfo['name']
-		print "Restaurant Address: %s" % restaurantInfo['address']
-		print "Image: %s \n" % restaurantInfo['image']
+		print("Restaurant Name: %s" % restaurantInfo['name'])
+		print("Restaurant Address: %s" % restaurantInfo['address'])
+		print("Image: %s \n" % restaurantInfo['image'])
 		return restaurantInfo
 	else:
-		print "No Restaurants Found for %s" % location
-		return "No Restaurants Found"
+		print("No Restaurants Found for %s" % location)
+		return("No Restaurants Found")
 
 if __name__ == '__main__':
 	findARestaurant("Pizza", "Tokyo, Japan")
