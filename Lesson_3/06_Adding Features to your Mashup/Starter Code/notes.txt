@@ -1,0 +1,28 @@
+Notes
+
+Dataflow, MVP, MVC
+
+Model
+
+View
+
+Controller
+
+findARestaurant.py
+- The meal type and location in human-readable form are passed into the findARestaurant function.  
+- The findARestaraunt function:
+    - makes a GET request to Google's Geocoding API via the function getGeocodeLocation to return the latitude and longitude of a search on a city.
+    - returns restaraunt details (id, img url, name and address) via a Forsquare API GET request that uses the longitude, latitude and meal type (and API keys)
+    - "No Restaraunts Found" if venues do not return for search on city and mealType.
+
+The function findARestaurant is imported from findARestaurant.py and is used by views.py (our main server (controller)) to generate jsons of restaurant data that are used to populate our restaurant database.
+- 
+
+
+SQLite is an “embedded” database which means it’s server-less and can run within your app.
+
+PostgreSQL on the other hand works based on a client-server model which requires a DB server to set up and run over the network.
+
+I chose PostgreSQL for my app for flexibility and I had a TON of data with a lot of table interdependency (relationships).  I had about 5 tables of data and needed to build complex queries for my data visualizations in Chart.js and D3.
+
+Descriptors are a low-level mechanism that lets you hook into an object's attributes being accessed.

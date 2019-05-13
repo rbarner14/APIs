@@ -25,12 +25,12 @@ def puppiesFunction():
     return getAllPuppies()
   elif request.method == 'POST':
     #Call the method to make a new puppy
-    print "Making a New puppy"
+    print ("Making a New puppy")
     
     name = request.args.get('name', '')
     description = request.args.get('description', '')
-    print name
-    print description
+    print (name)
+    print (description)
     return makeANewPuppy(name, description)
  
   
