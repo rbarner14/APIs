@@ -4,3 +4,4 @@ Vagrantfile
 *.sh
 __pycache__
 
+.DS_Store
